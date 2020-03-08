@@ -1,0 +1,102 @@
+import os
+import pygame
+import pytmx
+import global_vars as g
+import base_map as m
+
+current_dir = os.path.dirname("game.py")
+
+class FarmMap(m.Map):
+    def __init__(self, screen):
+        super().__init__()
+        self.filename = 'assets/maps/map.tmx'
+        self.game_map = pytmx.load_pygame(os.path.join(current_dir, self.filename))
+        self.screen = screen
+
+        self.tw = self.game_map.tilewidth
+        self.th = self.game_map.tileheight
+        self.tw_count = self.game_map.width
+        self.th_count = self.game_map.height
+        self.width = self.tw * self.tw_count
+        self.height = self.th * self.th_count
+
+        self.tiles = []
+        self.tree_top_tiles = []
+        self.objects = {'terrain': [], 'bushes': []}
+        self.shaders = []
+        self.tile_group = pygame.sprite.Group()
+        self.object_group = pygame.sprite.Group()
+        self.tree_tops = pygame.sprite.Group()
+
+        self.camera = m.Camera(self.width, self.height)
+        self.set_layers()
+
+    def set_layers(self):
+
+        def set_trees(tile_info):
+            if tile_info['Name'] == 'TreeAllow':
+                tile_sprite = m.TreeTop(tile, self.screen, x * self.tw, y * self.tw, self.tw, self.th)
+                self.tree_tops.add(tile_sprite)
+                self.tree_top_tiles.append((tile, tile_sprite))
+            elif tile_info['Name'] == 'TreeBlock':
+                tile_sprite = m.Tree(tile, x * self.tw, y * self.tw, self.tw, self.th)
+                self.objects['terrain'].append((tile, tile_sprite))
+                self.object_group.add(tile_sprite)
+
+        for layer in self.game_map.visible_layers:
+            if layer.name in ['Trees', 'Trees2', 'Trees3']:
+                for x, y, gid, in layer:
+                    tile = self.game_map.get_tile_image_by_gid(gid)
+                    if tile:
+                        tile_info = self.game_map.get_tile_properties_by_gid(gid)
+                        set_trees(tile_info)
+
+            elif layer.name == 'Terrain':
+                for x, y, gid in layer:
+                    tile = self.game_map.get_tile_image_by_gid(gid)
+                    tile_sprite = m.ObjTile(tile, x, y)
+                    if tile:
+                        self.objects['terrain'].append((tile, tile_sprite))
+
+            elif layer.name in ["Base", "Shaders"]:
+                for x, y, gid, in layer:
+                    tile = self.game_map.get_tile_image_by_gid(gid)
+                    tile_sprite = m.ObjTile(tile, x * self.tw, y * self.th)
+                    if tile:
+                       self.tiles.append((tile, tile_sprite))
+                       self.tile_group.add(tile_sprite)
+
+            elif layer.name == "ObjectShadows":
+                for obj in layer:
+                    if obj.image:
+                        obj_sprite = m.ObjTile(obj, obj.x, obj.y)
+                        self.shaders.append((obj.image, obj_sprite))
+
+            elif layer.name == "Collisions":
+                for obj in layer:
+                    if obj.image:
+                        obj_sprite = m.Bush(obj, obj.x, obj.y)
+                        self.objects['bushes'].append((obj, obj_sprite))
+                        self.object_group.add(obj_sprite)
+
+    def draw(self, player):
+        for tile in self.tiles:
+            self.screen.blit(tile[0], self.camera.apply(tile[1]))
+
+        for shader in self.shaders:
+            self.screen.blit(shader[0], self.camera.apply(shader[1]))
+
+        for tile in self.objects['terrain']:
+            self.screen.blit(tile[0], self.camera.apply(tile[1]))
+
+        for obj in self.objects['bushes']:
+            obj_surface = pygame.Surface((int(obj[1].image.width), int(obj[1].image.height)))
+            obj_image = obj_surface.blit(obj_surface, (0, 0))
+            self.screen.blit(obj[0].image, self.camera.apply(obj[1]))
+            
+        self.screen.blit(player.current_sprite, self.camera.apply(player))
+
+        for tile in self.tree_top_tiles:
+            self.screen.blit(tile[0], self.camera.apply(tile[1]))
+
+        self.camera.update(player)
