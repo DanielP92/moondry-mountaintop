@@ -80,13 +80,7 @@ class FarmMap(m.Map):
                         self.object_group.add(obj_sprite)
 
     def draw(self, player):
-        for tile in self.tiles:
-            self.screen.blit(tile[0], self.camera.apply(tile[1]))
-
-        for shader in self.shaders:
-            self.screen.blit(shader[0], self.camera.apply(shader[1]))
-
-        for tile in self.objects['terrain']:
+        for tile in self.tiles + self.shaders + self.objects['terrain']:
             self.screen.blit(tile[0], self.camera.apply(tile[1]))
 
         for obj in self.objects['bushes']:
