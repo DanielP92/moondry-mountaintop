@@ -17,11 +17,7 @@ class Map:
         pygame.init()
 
     def draw(self, screen):
-        for layer in self.file.visible_layers:
-            for x, y, gid, in layer:
-                tile = self.file.get_tile_image_by_gid(gid)
-                screen.blit(tile, (x * self.file.tilewidth,
-                                   y * self.file.tileheight))
+        pass
 
 class Camera:
     def __init__(self, width, height):
