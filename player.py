@@ -2,7 +2,7 @@ import os
 import pygame
 from base_character import Character
 from animation import Animate
-from libraries.imgs.player.images import PlayerImages
+from images import PlayerImages
 
 
 class Player(Character):
@@ -46,6 +46,12 @@ class Player(Character):
             elif self.change_y < 0 :
                 self.rect.top = obj.rect.bottom
                 self.stop()
+
+        wood = pygame.sprite.spritecollide(self, self.game_map.crafting_group, False)
+        for obj in wood:
+            col = pygame.sprite.collide_rect(self, obj)
+            if col:
+                obj.pick_up()
 
     def move_left(self):
         super().move_left()

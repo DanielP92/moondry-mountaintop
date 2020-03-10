@@ -3,6 +3,7 @@ import pygame
 import pytmx
 import global_vars as g
 import base_map as m
+import drops as d
 
 current_dir = os.path.dirname("game.py")
 
@@ -27,6 +28,9 @@ class FarmMap(m.Map):
         self.tile_group = pygame.sprite.Group()
         self.object_group = pygame.sprite.Group()
         self.tree_tops = pygame.sprite.Group()
+
+        self.crafting = {'wood': [[500, 700]]}
+        self.crafting_group = pygame.sprite.Group()
 
         self.camera = m.Camera(self.width, self.height)
         self.set_layers()
@@ -79,6 +83,11 @@ class FarmMap(m.Map):
                         self.objects['bushes'].append((obj, obj_sprite))
                         self.object_group.add(obj_sprite)
 
+        for item in self.crafting['wood']:
+            width = height = 20
+            item_sprite = d.Wood(item[0], item[1], width, height)
+            self.crafting_group.add(item_sprite)
+
     def draw(self, player):
         for tile in self.tiles + self.shaders + self.objects['terrain']:
             self.screen.blit(tile[0], self.camera.apply(tile[1]))
@@ -87,6 +96,9 @@ class FarmMap(m.Map):
             obj_surface = pygame.Surface((int(obj[1].image.width), int(obj[1].image.height)))
             obj_image = obj_surface.blit(obj_surface, (0, 0))
             self.screen.blit(obj[0].image, self.camera.apply(obj[1]))
+
+        for item in self.crafting_group:
+            self.screen.blit(item.image, self.camera.apply(item))
             
         self.screen.blit(player.current_sprite, self.camera.apply(player))
 
@@ -94,3 +106,4 @@ class FarmMap(m.Map):
             self.screen.blit(tile[0], self.camera.apply(tile[1]))
 
         self.camera.update(player)
+        self.crafting_group.update()
