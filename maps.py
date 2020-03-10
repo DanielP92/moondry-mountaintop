@@ -29,7 +29,7 @@ class FarmMap(m.Map):
         self.object_group = pygame.sprite.Group()
         self.tree_tops = pygame.sprite.Group()
 
-        self.crafting = {'wood': [[500, 700]]}
+        self.crafting = {'wood': [[500, 300]]}
         self.crafting_group = pygame.sprite.Group()
 
         self.camera = m.Camera(self.width, self.height)
