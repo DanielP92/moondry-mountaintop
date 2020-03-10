@@ -14,6 +14,14 @@ class Images:
         self.width, self.height = self.sprites.get_width(), self.sprites.get_height()
         self.img_size = 32
 
+    def set_sprites(self):
+        self.sprite_list = []
+
+        for i in range(0, self.height, self.img_size):
+            for j in range(0, self.width, self.img_size):
+                self.sprite_list.append(self.sprites.subsurface(j, i, self.img_size, self.img_size))
+
+
 class PlayerImages(Images):
     def __init__(self, file):
         super().__init__(file)
@@ -28,3 +36,8 @@ class PlayerImages(Images):
                             'right': [self.sprite_list[6], self.sprite_list[7], self.sprite_list[8], self.sprite_list[7]],
                             'up': [self.sprite_list[9], self.sprite_list[10], self.sprite_list[11], self.sprite_list[10]],
                             }
+
+class TransparentIcons(Images):
+    def __init__(self, file):
+        super().__init__()
+        
