@@ -17,7 +17,6 @@ class Images:
         for i in range(0, self.height, self.img_size):
             for j in range(0, self.width, self.img_size):
                 self.sprite_list.append(self.spritesheet.subsurface(j, i, self.img_size, self.img_size))
-        print(self.sprite_list)
 
 
 class PlayerImages(Images):
@@ -34,6 +33,7 @@ class PlayerImages(Images):
                             'up': [self.sprite_list[9], self.sprite_list[10], self.sprite_list[11], self.sprite_list[10]],
                             }
 
+
 class TransparentIcons(Images):
     def __init__(self, file):
         super().__init__(file)
@@ -43,4 +43,3 @@ class TransparentIcons(Images):
         self.set_surfaces()
 
         self.sprite_dict = {'wood': self.sprite_list[272]}
-        

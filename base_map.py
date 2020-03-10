@@ -10,7 +10,6 @@ class Map:
     def __init__(self):
         self.filename = ''
         self.game_map = pytmx.load_pygame(os.path.join(current_dir, self.filename))
-        print(self.game_map.properties)
         self.width = 0
         self.height = 0
         self.camera = Camera(self.width, self.height)
@@ -18,6 +17,7 @@ class Map:
 
     def draw(self, screen):
         pass
+
 
 class Camera:
     def __init__(self, width, height):
@@ -40,6 +40,7 @@ class Camera:
         y = max(-(self.height - SCREEN_H), y)
         self.camera = pygame.Rect(x, y, self.width, self.height)
 
+
 class ObjTile(pygame.sprite.Sprite):
     def __init__(self, obj, x, y):
         super().__init__()
@@ -57,12 +58,14 @@ class Tree(ObjTile):
         self.image = pygame.Surface((self.width, self.height))
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
+
 class TreeTop(ObjTile):
     def __init__(self, obj, screen, x, y, width, height):
         super().__init__(obj, x ,y)
         self.width, self.height = width, height
         self.screen = screen
         self.image = pygame.Surface((self.width, self.height))
+
 
 class Bush(ObjTile):
     def __init__(self, obj, x, y):

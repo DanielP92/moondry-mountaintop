@@ -30,7 +30,6 @@ class Wood(Drop):
         if self.counter >= 5:
             self.change_y = -self.change_y
             self.counter = 0
-        print(self.counter, self.change_y)
 
     def pick_up(self):
         self.kill()
