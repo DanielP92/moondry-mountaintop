@@ -1,4 +1,5 @@
 import pygame
+from images import TransparentIcons
 
 class Item(pygame.sprite.Sprite):
-    pass
+    item_sprites = TransparentIcons('transparent_icons.png')
