@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="-1" width="40" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="44">
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="48">
  <tileset firstgid="1" source="MoondryMountaintop.tsx"/>
  <tileset firstgid="1065" source="MoondryMountaintopShaders.tsx"/>
  <layer id="1" name="Base" width="40" height="25">
@@ -153,98 +153,112 @@
  <objectgroup id="5" name="Collisions">
   <object id="1" gid="42" x="395.398" y="234.985" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="2" gid="42" x="202.985" y="370.59" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="3" gid="43" x="233.221" y="240.482" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="4" gid="43" x="34.394" y="637.22" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="5" gid="42" x="363.329" y="521.772" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="6" gid="42" x="240.551" y="716.018" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="7" gid="43" x="49.0541" y="432.896" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="8" gid="43" x="40.8078" y="176.345" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="9" gid="41" x="171.832" y="519.024" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="10" gid="41" x="405.477" y="770.077" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="true"/>
     <property name="health" type="int" value="3"/>
    </properties>
   </object>
   <object id="11" gid="48" x="393.566" y="157.103" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="false"/>
     <property name="health" type="int" value="0"/>
    </properties>
   </object>
   <object id="12" gid="47" x="361.497" y="157.187" width="32" height="32">
    <properties>
+    <property name="destroyed" type="bool" value="false"/>
     <property name="drops" type="bool" value="false"/>
     <property name="health" type="int" value="0"/>
    </properties>
   </object>
-  <object id="31" gid="67" x="584.262" y="443.032" width="32" height="32">
+  <object id="38" gid="42" x="728.284" y="471.232" width="32" height="32">
    <properties>
-    <property name="drops" type="bool" value="false"/>
-    <property name="health" type="int" value="0"/>
+    <property name="destroyed" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="35" gid="66" x="415.061" y="471.232" width="32" height="32">
+  <object id="39" gid="41" x="797.778" y="426.918" width="32" height="32">
    <properties>
-    <property name="drops" type="bool" value="true"/>
-    <property name="health" type="int" value="5"/>
+    <property name="destroyed" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="36" gid="65" x="610.448" y="424.903" width="32" height="32">
+  <object id="40" gid="44" x="857.2" y="150.958" width="32" height="32">
    <properties>
-    <property name="drops" type="bool" value="false"/>
-    <property name="health" type="int" value="0"/>
+    <property name="destroyed" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="38" gid="42" x="728.284" y="471.232" width="32" height="32"/>
-  <object id="39" gid="41" x="797.778" y="426.918" width="32" height="32"/>
-  <object id="40" gid="44" x="857.2" y="150.958" width="32" height="32"/>
   <object id="41" gid="46" x="817.921" y="288.938" width="32" height="32"/>
-  <object id="43" gid="1030" x="1230.85" y="781.435" width="32" height="32"/>
+  <object id="43" gid="1030" x="1230.85" y="781.435" width="32" height="32">
+   <properties>
+    <property name="destroyed" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="44" gid="66" x="883.386" y="506.482" width="32" height="32"/>
+  <object id="45" gid="66" x="613.469" y="368.503" width="32" height="32"/>
+  <object id="46" gid="66" x="535.919" y="299.009" width="32" height="32"/>
+  <object id="47" gid="66" x="584.262" y="456.125" width="32" height="32"/>
  </objectgroup>
 </map>

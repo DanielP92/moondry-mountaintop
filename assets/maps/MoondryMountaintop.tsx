@@ -121,4 +121,39 @@
    <property name="Name" value="TreeBlock"/>
   </properties>
  </tile>
+ <tile id="40">
+  <properties>
+   <property name="destroyed" type="bool" value="false"/>
+   <property name="drops" type="bool" value="true"/>
+   <property name="health" type="int" value="3"/>
+  </properties>
+ </tile>
+ <tile id="41">
+  <properties>
+   <property name="destroyed" type="bool" value="false"/>
+   <property name="drops" type="bool" value="true"/>
+   <property name="health" type="int" value="3"/>
+  </properties>
+ </tile>
+ <tile id="42">
+  <properties>
+   <property name="destroyed" type="bool" value="false"/>
+   <property name="drops" type="bool" value="true"/>
+   <property name="health" type="int" value="3"/>
+  </properties>
+ </tile>
+ <tile id="43">
+  <properties>
+   <property name="destroyed" type="bool" value="false"/>
+   <property name="drops" type="bool" value="true"/>
+   <property name="health" type="int" value="3"/>
+  </properties>
+ </tile>
+ <tile id="65">
+  <properties>
+   <property name="destroyed" type="bool" value="false"/>
+   <property name="drops" type="bool" value="true"/>
+   <property name="health" type="int" value="3"/>
+  </properties>
+ </tile>
 </tileset>
