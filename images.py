@@ -42,4 +42,6 @@ class TransparentIcons(Images):
         self.width, self.height = self.spritesheet.get_width(), self.spritesheet.get_height()
         self.set_surfaces()
 
-        self.sprite_dict = {'wood': self.sprite_list[272]}
+        self.sprite_dict = {'wood': self.sprite_list[272],
+                            'stone': self.sprite_list[273],
+                            'ore': self.sprite_list[274]}
