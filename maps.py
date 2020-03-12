@@ -29,7 +29,9 @@ class FarmMap(m.Map):
         self.object_group = pygame.sprite.Group()
         self.tree_tops = pygame.sprite.Group()
 
-        self.crafting = {'wood': [[500, 300]]}
+        self.crafting = {'wood': [[500, 300]],
+                         'stone': [[550, 325]],
+                         'ore': [[600, 350]]}
         self.crafting_group = pygame.sprite.Group()
 
         self.camera = m.Camera(self.width, self.height)
@@ -87,6 +89,17 @@ class FarmMap(m.Map):
             width = height = 20
             item_sprite = d.Wood(item[0], item[1], width, height)
             self.crafting_group.add(item_sprite)
+
+        for item in self.crafting['stone']:
+            width = height = 20
+            item_sprite = d.Stone(item[0], item[1], width, height)
+            self.crafting_group.add(item_sprite)
+        
+        for item in self.crafting['ore']:
+            width = height = 20
+            item_sprite = d.Ore(item[0], item[1], width, height)
+            self.crafting_group.add(item_sprite)
+
 
     def draw(self, player):
         for tile in self.tiles + self.shaders + self.objects['terrain']:
