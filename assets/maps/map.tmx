@@ -250,15 +250,35 @@
     <property name="destroyed" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="41" gid="46" x="817.921" y="288.938" width="32" height="32"/>
+  <object id="41" gid="46" x="817.921" y="288.938" width="32" height="32">
+   <properties>
+    <property name="destroyed" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="43" gid="1030" x="1230.85" y="781.435" width="32" height="32">
    <properties>
     <property name="destroyed" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="44" gid="66" x="883.386" y="506.482" width="32" height="32"/>
-  <object id="45" gid="66" x="613.469" y="368.503" width="32" height="32"/>
-  <object id="46" gid="66" x="535.919" y="299.009" width="32" height="32"/>
-  <object id="47" gid="66" x="584.262" y="456.125" width="32" height="32"/>
+  <object id="44" gid="66" x="883.386" y="506.482" width="32" height="32">
+   <properties>
+    <property name="destroyed" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="45" gid="66" x="613.469" y="368.503" width="32" height="32">
+   <properties>
+    <property name="destroyed" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="46" gid="66" x="535.919" y="299.009" width="32" height="32">
+   <properties>
+    <property name="destroyed" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="47" gid="66" x="584.262" y="456.125" width="32" height="32">
+   <properties>
+    <property name="destroyed" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -6,6 +6,7 @@ resource_dir = os.path.join(current_dir, 'libraries')
 img_dir = os.path.join(resource_dir, 'imgs')
 player_dir = os.path.join(img_dir, 'player')
 item_dir = os.path.join(img_dir, 'items')
+map_dir = os.path.join(img_dir, 'map')
 
 class Images:
     def __init__(self, file):
@@ -17,6 +18,17 @@ class Images:
         for i in range(0, self.height, self.img_size):
             for j in range(0, self.width, self.img_size):
                 self.sprite_list.append(self.spritesheet.subsurface(j, i, self.img_size, self.img_size))
+
+
+class MapImages(Images):
+    def __init__(self, file):
+        super().__init__(file)
+        self.path = os.path.join(map_dir, self.file)
+        self.spritesheet = pygame.image.load(self.path)
+        self.width, self.height = self.spritesheet.get_width(), self.spritesheet.get_height()
+        self.set_surfaces()
+
+        self.sprite_dict = {'stump': self.sprite_list[44]}
 
 
 class PlayerImages(Images):

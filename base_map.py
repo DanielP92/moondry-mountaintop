@@ -3,10 +3,12 @@ import pygame
 import pytmx
 from global_vars import *
 import player as p
+from images import MapImages
 
 current_dir = os.path.dirname("game.py")
 
 class Map:
+
     def __init__(self):
         self.filename = ''
         self.game_map = pytmx.load_pygame(os.path.join(current_dir, self.filename))
@@ -42,6 +44,7 @@ class Camera:
 
 
 class ObjTile(pygame.sprite.Sprite):
+    images = MapImages('BaseChip_pipo.png')
     def __init__(self, obj, x, y):
         super().__init__()
         self.obj = obj
@@ -57,6 +60,7 @@ class Tree(ObjTile):
         self.width, self.height = width, height
         self.image = pygame.Surface((self.width, self.height))
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.props = {}
 
 
 class TreeTop(ObjTile):
@@ -67,9 +71,23 @@ class TreeTop(ObjTile):
         self.image = pygame.Surface((self.width, self.height))
 
 
+
 class Bush(ObjTile):
     def __init__(self, obj, x, y):
         super().__init__(obj, x, y)
         self.width = self.height = 28
-        self.image = self.obj
+        self.image = pygame.Surface((self.width, self.height))
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.counter = 0
+        self.props = self.obj.properties
+        self.props['destroyed'] = False
+        self.destroyed_img = self.images.sprite_dict['stump']
+
+    def update(self):
+        if self.props['destroyed']:
+            self.counter += 1
+
+        if self.counter >= 45:
+            self.props['destroyed'] = False
+            self.counter = 0
+
