@@ -36,7 +36,8 @@ class FarmMap(m.Map):
 
         self.camera = m.Camera(self.width, self.height)
         self.set_layers()
-        print([obj[0][0] for obj in self.objects.values()])
+
+
     def set_layers(self):
 
         def set_trees(tile_info):
