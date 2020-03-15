@@ -71,7 +71,6 @@ class TreeTop(ObjTile):
         self.image = pygame.Surface((self.width, self.height))
 
 
-
 class Bush(ObjTile):
     def __init__(self, obj, x, y):
         super().__init__(obj, x, y)
@@ -82,12 +81,16 @@ class Bush(ObjTile):
         self.props = self.obj.properties
         self.props['destroyed'] = False
         self.destroyed_img = self.images.sprite_dict['stump']
+        self.orig_img = self.obj.image
+        self.current_img = self.orig_img
 
     def update(self):
         if self.props['destroyed']:
             self.counter += 1
+            self.current_img = self.destroyed_img
 
         if self.counter >= 45:
             self.props['destroyed'] = False
             self.counter = 0
+            self.current_img = self.orig_img
 

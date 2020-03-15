@@ -108,10 +108,7 @@ class FarmMap(m.Map):
         for obj in self.objects['bushes']:
             obj_surface = pygame.Surface((int(obj[1].width), int(obj[1].height)))
             obj_image = obj_surface.blit(obj_surface, (0, 0))
-            if obj[0].properties['destroyed']:
-                self.screen.blit(obj[1].destroyed_img, self.camera.apply(obj[1]))
-            else:
-                self.screen.blit(obj[0].image, self.camera.apply(obj[1]))
+            self.screen.blit(obj[1].current_img, self.camera.apply(obj[1]))
 
         for item in self.crafting_group:
             self.screen.blit(item.image, self.camera.apply(item))
