@@ -23,7 +23,7 @@ class FarmMap(m.Map):
 
         self.tiles = []
         self.tree_top_tiles = []
-        self.objects = {'terrain': [], 'bushes': []}
+        self.objects = {'terrain': [], 'bushes': [], 'rocks': [], 'other': []}
         self.shaders = []
         self.tile_group = pygame.sprite.Group()
         self.object_group = pygame.sprite.Group()
@@ -36,7 +36,7 @@ class FarmMap(m.Map):
 
         self.camera = m.Camera(self.width, self.height)
         self.set_layers()
-
+        print([obj[0][0] for obj in self.objects.values()])
     def set_layers(self):
 
         def set_trees(tile_info):
@@ -81,8 +81,16 @@ class FarmMap(m.Map):
             elif layer.name == "Collisions":
                 for obj in layer:
                     if obj.image:
-                        obj_sprite = m.Bush(obj, obj.x, obj.y)
-                        self.objects['bushes'].append((obj, obj_sprite))
+                        if obj.name == "Bush":
+                            obj_sprite = m.Bush(obj, obj.x, obj.y)
+                            self.objects['bushes'].append((obj, obj_sprite))
+                        elif obj.name == "Rock":
+                            obj_sprite = m.Rock(obj, obj.x, obj.y)
+                            self.objects['rocks'].append((obj, obj_sprite))
+                        elif obj.name == None:
+                            obj_sprite = m.Misc(obj, obj.x, obj.y)
+                            self.objects['other'].append((obj, obj_sprite))
+
                         self.object_group.add(obj_sprite)
 
         for item in self.crafting['wood']:
@@ -105,7 +113,7 @@ class FarmMap(m.Map):
         for tile in self.tiles + self.shaders + self.objects['terrain']:
             self.screen.blit(tile[0], self.camera.apply(tile[1]))
 
-        for obj in self.objects['bushes']:
+        for obj in self.objects['bushes'] + self.objects['rocks'] + self.objects['other']:
             obj_surface = pygame.Surface((int(obj[1].width), int(obj[1].height)))
             obj_image = obj_surface.blit(obj_surface, (0, 0))
             self.screen.blit(obj[1].current_img, self.camera.apply(obj[1]))

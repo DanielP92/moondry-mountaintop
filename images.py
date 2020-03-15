@@ -28,7 +28,8 @@ class MapImages(Images):
         self.width, self.height = self.spritesheet.get_width(), self.spritesheet.get_height()
         self.set_surfaces()
 
-        self.sprite_dict = {'stump': self.sprite_list[44]}
+        self.sprite_dict = {'stump': self.sprite_list[44],
+                            'rubble': self.sprite_list[69]}
 
 
 class PlayerImages(Images):

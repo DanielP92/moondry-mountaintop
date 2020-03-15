@@ -36,19 +36,39 @@ class Player(Character):
         for obj in collisions:
             if self.change_x > 0:
                 self.rect.right = obj.rect.left
-                obj.props['destroyed'] = True
+                
+                try:
+                    obj.props['destroyed'] = True
+                except AttributeError:
+                    pass
+
                 self.stop()
             elif self.change_x < 0:
                 self.rect.left = obj.rect.right
-                obj.props['destroyed'] = True
+                
+                try:
+                    obj.props['destroyed'] = True
+                except AttributeError:
+                    pass
+
                 self.stop()
             elif self.change_y > 0:
                 self.rect.bottom = obj.rect.top
-                obj.props['destroyed'] = True
+                
+                try:
+                    obj.props['destroyed'] = True
+                except AttributeError:
+                    pass
+
                 self.stop()
             elif self.change_y < 0 :
                 self.rect.top = obj.rect.bottom
-                obj.props['destroyed'] = True
+                
+                try:
+                    obj.props['destroyed'] = True
+                except AttributeError:
+                    pass
+
                 self.stop()
 
         wood = pygame.sprite.spritecollide(self, self.game_map.crafting_group, False)

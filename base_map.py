@@ -44,7 +44,7 @@ class Camera:
 
 
 class ObjTile(pygame.sprite.Sprite):
-    images = MapImages('BaseChip_pipo.png')
+    images = MapImages('BaseChip_pipo.png').sprite_dict
     def __init__(self, obj, x, y):
         super().__init__()
         self.obj = obj
@@ -52,6 +52,7 @@ class ObjTile(pygame.sprite.Sprite):
         self.width = self.height = 32
         self.image = pygame.Surface((self.width, self.height))
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.current_img = self.image
 
 
 class Tree(ObjTile):
@@ -60,7 +61,6 @@ class Tree(ObjTile):
         self.width, self.height = width, height
         self.image = pygame.Surface((self.width, self.height))
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
-        self.props = {}
 
 
 class TreeTop(ObjTile):
@@ -71,7 +71,7 @@ class TreeTop(ObjTile):
         self.image = pygame.Surface((self.width, self.height))
 
 
-class Bush(ObjTile):
+class Destroyable(ObjTile):
     def __init__(self, obj, x, y):
         super().__init__(obj, x, y)
         self.width = self.height = 28
@@ -80,8 +80,8 @@ class Bush(ObjTile):
         self.counter = 0
         self.props = self.obj.properties
         self.props['destroyed'] = False
-        self.destroyed_img = self.images.sprite_dict['stump']
         self.orig_img = self.obj.image
+        self.destroyed_img = None
         self.current_img = self.orig_img
 
     def update(self):
@@ -94,3 +94,19 @@ class Bush(ObjTile):
             self.counter = 0
             self.current_img = self.orig_img
 
+
+class Bush(Destroyable):
+    def __init__(self, obj, x, y):
+        super().__init__(obj, x, y)
+        self.destroyed_img = self.images['stump']
+
+
+class Rock(Destroyable):
+    def __init__(self, obj, x, y):
+        super().__init__(obj, x, y)
+        self.destroyed_img = self.images['rubble']
+
+class Misc(Destroyable):
+    def __init__(self, obj, x, y):
+        super().__init__(obj, x, y)
+        self.destroyed_img = self.current_img
