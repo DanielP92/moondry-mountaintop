@@ -1,9 +1,11 @@
 import os
+import random
 import pygame
 import pytmx
 from global_vars import *
 import player as p
 from images import MapImages
+import drops as d
 
 current_dir = os.path.dirname("game.py")
 
@@ -15,6 +17,7 @@ class Map:
         self.height = 0
         self.camera = Camera(self.width, self.height)
         self.object_group = pygame.sprite.Group()
+        self.crafting_group = pygame.sprite.Group()
         pygame.init()
 
     def draw(self, screen):
@@ -83,16 +86,30 @@ class Destroyable(ObjTile):
         self.orig_img = self.obj.image
         self.destroyed_img = None
         self.current_img = self.orig_img
+        self.drops = pygame.sprite.Group()
+        self.level = None
+        self.set_drops()
+
+    def set_drops(self):
+        pass
 
     def update(self):
         if self.props['destroyed']:
             self.counter += 1
             self.current_img = self.destroyed_img
+            self.level.crafting_group.add(self.drops)
+            for drop in self.drops:
+                drop.active = True
+            self.drops.empty()
 
-        if self.counter >= 45:
+        if self.counter >= 100:
             self.props['destroyed'] = False
             self.counter = 0
             self.current_img = self.orig_img
+            self.set_drops()
+
+    def destroy(self):
+        pass
 
 
 class Bush(Destroyable):
@@ -100,12 +117,35 @@ class Bush(Destroyable):
         super().__init__(obj, x, y)
         self.destroyed_img = self.images['stump']
 
+    def set_drops(self):
+        z = random.randint(1, 100)
+        if z == 1:
+            for i in range(0, 3):
+                self.drops.add(d.Wood(self.x, self.y, 28, 28))
+        elif 2 <= z <= 80:
+            for i in range(0, 2):
+                self.drops.add(d.Wood(self.x, self.y, 28, 28))
+        elif z > 80:
+            self.drops.add(d.Wood(self.x, self.y, 28, 28))
+        print(self.drops)
+
 
 class Rock(Destroyable):
     def __init__(self, obj, x, y):
         super().__init__(obj, x, y)
         self.destroyed_img = self.images['rubble']
 
+    def set_drops(self):
+        z = random.randint(1, 100)
+        if z == 1:
+            for i in range(0, 3):
+                self.drops.add(d.Stone(self.x, self.y, 28, 28))
+        elif 2 <= z <= 80:
+            for i in range(0, 2):
+                self.drops.add(d.Stone(self.x, self.y, 28, 28))
+        elif z > 80:
+            self.drops.add(d.Stone(self.x, self.y, 28, 28))
+        print(self.drops)
 
 class Misc(Destroyable):
     def __init__(self, obj, x, y):

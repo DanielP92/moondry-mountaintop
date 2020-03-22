@@ -22,7 +22,6 @@ class BaseWield(pygame.sprite.Sprite):
     def update(self):
         if self.active:
             self.use()
-            print(self.active)
 
     def use(self):
         g.active_sprite_list.add(self)
@@ -35,8 +34,13 @@ class BaseWield(pygame.sprite.Sprite):
         self.col_sprite.rect = self.col_sprite.surface.get_rect()
         self.col_sprite.rect.centerx = self.pos[0] + offset * self.direction + 16
         self.col_sprite.rect.centery = self.pos[1] + offset * self.direction - 16
+        self.col_sprite.active = False
 
         self.step += self.speed
+
+        if self.step > 40:
+            self.col_sprite.active = True
+
         if self.step >= self.tween_range:
             self.step = 0
             self.current_sprite = pygame.transform.rotate(self.image_clean, 45)
@@ -45,6 +49,7 @@ class BaseWield(pygame.sprite.Sprite):
             g.active_sprite_list.remove(self)
             g.all_sprites.remove(self)
             self.active = False
+            self.col_sprite.active = False
         self.rect = self.current_sprite.get_rect(center = self.rect.center)
 
 
@@ -61,7 +66,7 @@ class PickAxe(BaseWield):
         super().use()
         for stone in g.stone_sprites:
             collision = pygame.sprite.collide_rect(self.col_sprite, stone)
-            if collision:
+            if collision and self.col_sprite.active:
                 stone.props['destroyed'] = True
 
 
@@ -78,5 +83,5 @@ class Axe(BaseWield):
         super().use()
         for bush in g.bush_sprites:
             collision = pygame.sprite.collide_rect(self.col_sprite, bush)
-            if collision:
+            if collision and self.col_sprite.active:
                 bush.props['destroyed'] = True

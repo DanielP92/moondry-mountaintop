@@ -87,11 +87,13 @@ class FarmMap(m.Map):
                             self.objects['bushes'].append((obj, obj_sprite))
                             g.all_sprites.add(obj_sprite)
                             g.bush_sprites.add(obj_sprite)
+                            obj_sprite.level = self
                         elif obj.name == "Rock":
                             obj_sprite = m.Rock(obj, obj.x, obj.y)
                             self.objects['rocks'].append((obj, obj_sprite))
                             g.all_sprites.add(obj_sprite)
                             g.stone_sprites.add(obj_sprite)
+                            obj_sprite.level = self
                         elif obj.name == None:
                             obj_sprite = m.Misc(obj, obj.x, obj.y)
                             self.objects['other'].append((obj, obj_sprite))
