@@ -8,13 +8,13 @@ from images import MapImages
 current_dir = os.path.dirname("game.py")
 
 class Map:
-
     def __init__(self):
         self.filename = ''
         self.game_map = pytmx.load_pygame(os.path.join(current_dir, self.filename))
         self.width = 0
         self.height = 0
         self.camera = Camera(self.width, self.height)
+        self.object_group = pygame.sprite.Group()
         pygame.init()
 
     def draw(self, screen):
@@ -105,6 +105,7 @@ class Rock(Destroyable):
     def __init__(self, obj, x, y):
         super().__init__(obj, x, y)
         self.destroyed_img = self.images['rubble']
+
 
 class Misc(Destroyable):
     def __init__(self, obj, x, y):

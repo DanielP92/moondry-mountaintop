@@ -2,7 +2,6 @@ import os
 import pygame
 import pytmx
 from player import Player
-from animation import Animate
 import global_vars as g
 import maps as m
 
@@ -15,8 +14,8 @@ def main():
     clock = pygame.time.Clock()
     done = False
     player = Player(game_map, screen)
-    active_sprite_list = pygame.sprite.Group()
-    active_sprite_list.add(player)
+    g.all_sprites.add(player)
+    g.active_sprite_list.add(player)
     print(" ".join("Welcome to Moondry Mountaintop"))
     while not done:
         for event in pygame.event.get():
@@ -32,6 +31,12 @@ def main():
                     player.move_up()
                 if event.key == pygame.K_DOWN:
                     player.move_down()
+                if event.key == pygame.K_a:
+                    player.stop()
+                    player.mine()
+                if event.key == pygame.K_s:
+                    player.stop()
+                    player.chop()
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player.change_x < 0:
@@ -43,7 +48,7 @@ def main():
                 if event.key == pygame.K_DOWN and player.change_y > 0:
                     player.stop()
 
-        active_sprite_list.update()
+        g.all_sprites.update()
         game_map.draw(player)
         clock.tick(30)
         pygame.display.flip()

@@ -85,9 +85,13 @@ class FarmMap(m.Map):
                         if obj.name == "Bush":
                             obj_sprite = m.Bush(obj, obj.x, obj.y)
                             self.objects['bushes'].append((obj, obj_sprite))
+                            g.all_sprites.add(obj_sprite)
+                            g.bush_sprites.add(obj_sprite)
                         elif obj.name == "Rock":
                             obj_sprite = m.Rock(obj, obj.x, obj.y)
                             self.objects['rocks'].append((obj, obj_sprite))
+                            g.all_sprites.add(obj_sprite)
+                            g.stone_sprites.add(obj_sprite)
                         elif obj.name == None:
                             obj_sprite = m.Misc(obj, obj.x, obj.y)
                             self.objects['other'].append((obj, obj_sprite))
@@ -121,8 +125,9 @@ class FarmMap(m.Map):
 
         for item in self.crafting_group:
             self.screen.blit(item.image, self.camera.apply(item))
-            
-        self.screen.blit(player.current_sprite, self.camera.apply(player))
+        
+        for sprite in g.active_sprite_list:
+            self.screen.blit(sprite.current_sprite, self.camera.apply(sprite))
 
         for tile in self.tree_top_tiles:
             self.screen.blit(tile[0], self.camera.apply(tile[1]))

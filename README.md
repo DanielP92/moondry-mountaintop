@@ -3,4 +3,4 @@ small rpg project
 
 first commit is a test of basic movement, collision and camera
 
-started 12/03/2020
+started 29/02/2020

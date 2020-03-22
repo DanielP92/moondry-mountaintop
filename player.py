@@ -3,6 +3,7 @@ import pygame
 from base_character import Character
 from animation import Animate
 from images import PlayerImages
+import wields as w
 
 
 class Player(Character):
@@ -18,12 +19,14 @@ class Player(Character):
         self.rect = self.image.get_rect()
         self.rect.x = 410
         self.rect.y = 300
+        self.pos = self.rect
         self.animation = Animate(screen, self)
         self.animation_counter = self.animation_step = 0
         self.counter = 0
         self.group = pygame.sprite.Group()
         self.current_sprite = self.image
         self.current_sprites = [self.images.sprite_dict['down'][1] for x in range(2)]
+        self.wield = None
 
     def update(self):
         self.animation.update()
@@ -36,39 +39,15 @@ class Player(Character):
         for obj in collisions:
             if self.change_x > 0:
                 self.rect.right = obj.rect.left
-                
-                try:
-                    obj.props['destroyed'] = True
-                except AttributeError:
-                    pass
-
                 self.stop()
             elif self.change_x < 0:
                 self.rect.left = obj.rect.right
-                
-                try:
-                    obj.props['destroyed'] = True
-                except AttributeError:
-                    pass
-
                 self.stop()
             elif self.change_y > 0:
                 self.rect.bottom = obj.rect.top
-                
-                try:
-                    obj.props['destroyed'] = True
-                except AttributeError:
-                    pass
-
                 self.stop()
             elif self.change_y < 0 :
                 self.rect.top = obj.rect.bottom
-                
-                try:
-                    obj.props['destroyed'] = True
-                except AttributeError:
-                    pass
-
                 self.stop()
 
         wood = pygame.sprite.spritecollide(self, self.game_map.crafting_group, False)
@@ -98,10 +77,10 @@ class Player(Character):
         self.current_sprites = [self.current_sprites[1] for x in range(2)]
 
     def mine(self):
-        pass
+        self.wield = w.PickAxe(self.pos)
 
     def chop(self):
-        pass
+        self.wield = w.Axe(self.pos)
 
     def till(self):
         pass
