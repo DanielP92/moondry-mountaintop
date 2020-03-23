@@ -14,11 +14,11 @@ class Drop(Item):
         self.change_y = 1
         self.counter = 0
         self.active = False
-        self.tween = tween.easeOutElastic
-        self.tween_range = random.randint(1, 5)
-        self.speed = 1
-        self.directionx = random.choice([-1, 1])
-        self.directiony = random.choice([-1, 1])
+        self.tween = random.choice([tween.easeOutQuint, tween.easeOutQuart, tween.easeInExpo, tween.easeOutExpo])
+        self.tween_range = 10
+        self.speed = 0.5
+        self.directionx = random.choice([-0.2, 0.2])
+        self.directiony = random.choice([-0.2, 0.2])
         self.step = 0
 
     def update(self):
