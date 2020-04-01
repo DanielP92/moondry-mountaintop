@@ -11,6 +11,7 @@ class Drop(Item):
         self.width = width
         self.height = height
         self.surface = pygame.Surface((int(self.rect.width), int(self.rect.height)))
+        self.image = self.surface
         self.change_y = 1
         self.counter = 0
         self.active = False

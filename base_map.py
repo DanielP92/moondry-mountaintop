@@ -87,11 +87,20 @@ class Destroyable(ObjTile):
         self.destroyed_img = None
         self.current_img = self.orig_img
         self.drops = pygame.sprite.Group()
+        self.drop_type = d.Drop
         self.level = None
-        self.set_drops()
 
     def set_drops(self):
-        pass
+        z = random.randint(1, 100)
+        if z == 1:
+            for i in range(0, 3):
+                self.drops.add(self.drop_type(self.x, self.y, 28, 28))
+        elif 2 <= z <= 80:
+            for i in range(0, 2):
+                self.drops.add(self.drop_type(self.x, self.y, 28, 28))
+        elif z > 80:
+            self.drops.add(self.drop_type(self.x, self.y, 28, 28))
+        print(self.drops)
 
     def update(self):
         if self.props['destroyed']:
@@ -116,36 +125,15 @@ class Bush(Destroyable):
     def __init__(self, obj, x, y):
         super().__init__(obj, x, y)
         self.destroyed_img = self.images['stump']
-
-    def set_drops(self):
-        z = random.randint(1, 100)
-        if z == 1:
-            for i in range(0, 3):
-                self.drops.add(d.Wood(self.x, self.y, 28, 28))
-        elif 2 <= z <= 80:
-            for i in range(0, 2):
-                self.drops.add(d.Wood(self.x, self.y, 28, 28))
-        elif z > 80:
-            self.drops.add(d.Wood(self.x, self.y, 28, 28))
-        print(self.drops)
-
+        self.drop_type = d.Wood
+        self.set_drops()
 
 class Rock(Destroyable):
     def __init__(self, obj, x, y):
         super().__init__(obj, x, y)
         self.destroyed_img = self.images['rubble']
-
-    def set_drops(self):
-        z = random.randint(1, 100)
-        if z == 1:
-            for i in range(0, 3):
-                self.drops.add(d.Stone(self.x, self.y, 28, 28))
-        elif 2 <= z <= 80:
-            for i in range(0, 2):
-                self.drops.add(d.Stone(self.x, self.y, 28, 28))
-        elif z > 80:
-            self.drops.add(d.Stone(self.x, self.y, 28, 28))
-        print(self.drops)
+        self.drop_type = d.Stone
+        self.set_drops()
 
 class Misc(Destroyable):
     def __init__(self, obj, x, y):
