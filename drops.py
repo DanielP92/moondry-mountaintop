@@ -42,8 +42,6 @@ class Drop(Item):
         if self.step >= self.tween_range:
             self.active = False
 
-        print(self.rect.x, self.rect.y)
-
 
 class Ore(Drop):
     def __init__(self, x, y, width, height):

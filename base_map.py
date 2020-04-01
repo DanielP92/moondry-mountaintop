@@ -100,7 +100,6 @@ class Destroyable(ObjTile):
                 self.drops.add(self.drop_type(self.x, self.y, 28, 28))
         elif z > 80:
             self.drops.add(self.drop_type(self.x, self.y, 28, 28))
-        print(self.drops)
 
     def update(self):
         if self.props['destroyed']:
