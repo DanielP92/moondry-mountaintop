@@ -27,6 +27,7 @@ class Player(Character):
         self.current_sprite = self.image
         self.current_sprites = [self.images.sprite_dict['down'][1] for x in range(2)]
         self.wield = None
+        self.inventory = Inventory()
 
     def update(self):
         self.animation.update()
@@ -54,6 +55,7 @@ class Player(Character):
         for obj in wood:
             col = pygame.sprite.collide_rect(self, obj)
             if col:
+                self.inventory.add_to_inv(obj)
                 obj.pick_up()
 
     def move_left(self):
@@ -84,3 +86,17 @@ class Player(Character):
 
     def till(self):
         pass
+
+
+class Inventory:
+    def __init__(self):
+        self.inventory = {}
+
+    def add_to_inv(self, item):
+        try:
+            self.inventory[item.__str__()] += 1
+        except:
+            self.inventory[item.__str__()] = 1
+
+        print(self.inventory)
+

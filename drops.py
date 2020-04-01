@@ -50,6 +50,9 @@ class Ore(Drop):
         super().__init__(x, y, width, height)
         self.image = self.item_sprites.sprite_dict['ore']
 
+    def __str__(self):
+        return 'Ore'
+
     def pick_up(self):
         super().pick_up()
 
@@ -59,6 +62,9 @@ class Wood(Drop):
         super().__init__(x, y, width, height)
         self.image = self.item_sprites.sprite_dict['wood']
 
+    def __str__(self):
+        return 'Wood'
+
     def pick_up(self):
         super().pick_up()
 
@@ -67,6 +73,9 @@ class Stone(Drop):
     def __init__(self, x, y, width, height):
         super().__init__(x, y, width, height)
         self.image = self.item_sprites.sprite_dict['stone']
+
+    def __str__(self):
+        return 'Stone'
         
     def pick_up(self):
         super().pick_up()
