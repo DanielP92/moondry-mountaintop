@@ -14,8 +14,9 @@ class Player(Character):
         super().__init__()
         self.game_map = game_map
         self.screen = screen
-        self.width = self.height = 16
-        self.image = pygame.Surface([self.width, self.height], pygame.SRCALPHA)
+        self.width = 16 
+        self.height = 8
+        self.image = pygame.Surface([self.width, self.height], pygame.SRCALPHA, 32)
         self.rect = self.image.get_rect()
         self.rect.x = 410
         self.rect.y = 300

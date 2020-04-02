@@ -32,7 +32,7 @@ class Camera:
 
     def apply(self, entity):
         if isinstance(entity, p.Player):
-            return entity.rect.move((self.camera.topleft[0] - 5, self.camera.topleft[1] - 16))
+            return entity.rect.move((self.camera.topleft[0] - 5, self.camera.topleft[1] - 24))
         else:
             return entity.rect.move(self.camera.topleft)
 
@@ -57,6 +57,12 @@ class ObjTile(pygame.sprite.Sprite):
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.current_img = self.image
 
+class Water(ObjTile):
+    def __init__(self, obj, x, y, width, height):
+        super().__init__(obj, x ,y)
+        self.width, self.height = width, height
+        self.image = pygame.Surface((self.width, self.height))
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
 class Tree(ObjTile):
     def __init__(self, obj, x, y, width, height):

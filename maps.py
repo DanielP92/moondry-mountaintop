@@ -40,7 +40,7 @@ class FarmMap(m.Map):
 
     def set_layers(self):
 
-        def set_trees(tile_info):
+        def set_trees_and_water(tile_info):
             if tile_info['Name'] == 'TreeAllow':
                 tile_sprite = m.TreeTop(tile, self.screen, x * self.tw, y * self.tw, self.tw, self.th)
                 self.tree_tops.add(tile_sprite)
@@ -49,14 +49,18 @@ class FarmMap(m.Map):
                 tile_sprite = m.Tree(tile, x * self.tw, y * self.tw, self.tw, self.th)
                 self.objects['terrain'].append((tile, tile_sprite))
                 self.object_group.add(tile_sprite)
-
+            elif tile_info['Name'] == 'Water':
+                tile_sprite = m.Water(tile, x * self.tw, y * self.tw, self.tw, self.th)
+                self.objects['terrain'].append((tile, tile_sprite))
+                self.object_group.add(tile_sprite)
+                
         for layer in self.game_map.visible_layers:
-            if layer.name in ['Trees', 'Trees2', 'Trees3']:
+            if layer.name in ['Trees', 'Trees2', 'Trees3', 'Water']:
                 for x, y, gid, in layer:
                     tile = self.game_map.get_tile_image_by_gid(gid)
                     if tile:
                         tile_info = self.game_map.get_tile_properties_by_gid(gid)
-                        set_trees(tile_info)
+                        set_trees_and_water(tile_info)
 
             elif layer.name == 'Terrain':
                 for x, y, gid in layer:
